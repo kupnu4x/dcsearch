@@ -1,0 +1,32 @@
+<?php
+require_once(dirname(__FILE__).'/DbSimple/Generic.php');
+require_once(dirname(__FILE__).'/DbSimple/Mysql.php');
+require_once(dirname(__FILE__).'/Sphinx/SphinxApi.php');
+require_once(dirname(__FILE__).'/DC.class.inc');
+require_once(dirname(__FILE__).'/Indexer.class.inc');
+require_once(dirname(__FILE__).'/Searcher.class.inc');
+
+define('DB_HOST','localhost');
+define('DB_USER','dcsearch');
+define('DB_PASS','dc4pass');
+define('DB_NAME','dcsearch');
+define('INTERVAL_NICKNAME', 60*60*24);
+define('INTERVAL_NICKNAME_DIE',60*60*24*14);
+define('MIN_FILESIZE',1024*1024);//1mb
+
+define('BOT_NICKNAME','BOTeg');
+define('BOT_SHARESIZE',999666333111);
+define('BOT_EMAIL','1@2.3');
+define('BOT_SPEED','LAN(T1)');
+define('BOT_VERSION','<FlylinkDC++ V:(r394),M:A,H:1/0/0,S:15>');
+define('BOT_TCP_PORT',18887);
+
+define('FIX_HUB_CP1251',true);
+define('CONSOLE_OUT_CHARSET','cp866');//empty for utf
+
+define('DC_SERVER','172.16.22.1');
+define('DC_PORT',4111);
+
+define('WORKER_TMPDIR',dirname(dirname(__FILE__)).'/tmp');
+
+?>

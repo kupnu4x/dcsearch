@@ -1,0 +1,154 @@
+###############################################################
+###########################FILES###############################
+###############################################################
+source dc_files
+{
+	type            = mysql
+	sql_host        = localhost
+	sql_user        = dcsearch
+	sql_pass        = dc4pass
+	sql_db          = dcsearch
+	sql_port        = 3306
+	sql_query_pre   = SET NAMES utf8
+	sql_query_pre   = delete from files where deleted=1
+	sql_query_pre 	= REPLACE INTO sphinx SELECT 1, ifnull(MAX(id),0) FROM files
+	sql_query 		= select id, name, extension from files where id>=$start and id<=$end and id<=(SELECT last_id FROM sphinx WHERE id=1) and deleted=0
+	sql_query_range = select 1,last_id from sphinx where id=1
+	sql_range_step  = 100000
+	sql_attr_str2ordinal = extension
+}
+
+source dc_files_delta : dc_files
+{
+	sql_query_pre   = SET NAMES utf8
+	sql_query 		= select id, name, tth, extension from files where id>(SELECT last_id FROM sphinx WHERE id=1) and deleted=0
+	sql_query_range = 
+	sql_range_step  = 0
+	sql_query_killlist = select id from files where deleted=1
+	#sql_query_post  = delete from files where deleted=1
+	sql_attr_str2ordinal = extension
+	
+}
+
+index dc_files
+{
+	source = dc_files
+	path = c:/work/bin/sphinx-0.9.9/sphindex/dc_files
+	docinfo = extern
+	morphology = stem_enru
+	charset_type = utf-8
+	enable_star = 1
+	min_prefix_len = 5
+}
+
+index dc_files_delta : dc_files
+{
+	source = dc_files_delta
+	path = c:/work/bin/sphinx-0.9.9/sphindex/dc_files_delta
+}
+###############################################################
+###########################TTHS###############################
+###############################################################
+source dc_tths
+{
+	type            = mysql
+	sql_host        = localhost
+	sql_user        = dcsearch
+	sql_pass        = dc4pass
+	sql_db          = dcsearch
+	sql_port        = 3306
+	sql_query_pre   = SET NAMES utf8
+	sql_query_pre   = delete from files where deleted=1
+	sql_query_pre 	= REPLACE INTO sphinx SELECT 3, ifnull(MAX(id),0) FROM files
+	sql_query 		= select id, tth from files where id>=$start and id<=$end and id<=(SELECT last_id FROM sphinx WHERE id=1) and deleted=0
+	sql_query_range = select 1,last_id from sphinx where id=1
+	sql_range_step  = 100000
+}
+
+source dc_tths_delta : dc_tths
+{
+	sql_query_pre   = SET NAMES utf8
+	sql_query 		= select id, tth from files where id>(SELECT last_id FROM sphinx WHERE id=3) and deleted=0
+	sql_query_range = 
+	sql_range_step  = 0
+	sql_query_killlist = select id from files where deleted=1
+	sql_query_post  = delete from files where deleted=1
+}
+
+index dc_tths
+{
+	source = dc_tths
+	path = c:/work/bin/sphinx-0.9.9/sphindex/dc_tths
+	docinfo = extern
+	morphology = none
+	charset_type = utf-8
+}
+
+index dc_tths_delta : dc_tths
+{
+	source = dc_tths_delta
+	path = c:/work/bin/sphinx-0.9.9/sphindex/dc_tths_delta
+}
+###############################################################
+###########################DIRS################################
+###############################################################
+source dc_dirs
+{
+	type            = mysql
+	sql_host        = localhost
+	sql_user        = dcsearch
+	sql_pass        = dc4pass
+	sql_db          = dcsearch
+	sql_port        = 3306
+	sql_query_pre   = SET NAMES utf8
+	sql_query_pre   = delete from dirs where deleted=1
+	sql_query_pre 	= REPLACE INTO sphinx SELECT 2, ifnull(MAX(id),0) FROM dirs
+	sql_query 		= select id, name from dirs where id>=$start and id<=$end and id<=(SELECT last_id FROM sphinx WHERE id=2) and deleted=0
+	sql_query_range = select 1,last_id from sphinx where id=2
+	sql_range_step  = 100000
+}
+
+source dc_dirs_delta : dc_dirs
+{
+	sql_query_pre   = SET NAMES utf8
+	sql_query 		= select id, name from dirs where id>(SELECT last_id FROM sphinx WHERE id=2) and deleted=0
+	sql_query_range = 
+	sql_range_step  = 0
+	sql_query_killlist = select id from dirs where deleted=1
+	sql_query_post  = delete from dirs where deleted=1	
+}
+
+index dc_dirs
+{
+	source = dc_dirs
+	path = c:/work/bin/sphinx-0.9.9/sphindex/dc_dirs
+	docinfo = extern
+	morphology = stem_enru
+	charset_type = utf-8
+	enable_star = 1
+	min_prefix_len = 5
+}
+
+index dc_dirs_delta : dc_dirs
+{
+	source = dc_dirs_delta
+	path = c:/work/bin/sphinx-0.9.9/sphindex/dc_dirs_delta
+}
+###############################################################
+###############################################################
+###############################################################
+
+indexer
+{
+	mem_limit = 64M
+}
+
+searchd
+{
+	listen = 127.0.0.1:3312
+	log = c:/work/bin/sphinx-0.9.9/searchd.log
+	query_log = c:/work/bin/sphinx-0.9.9/query.log
+	read_timeout = 5
+	max_children = 30
+	pid_file = c:/work/bin/sphinx-0.9.9/searchd.pid
+}
