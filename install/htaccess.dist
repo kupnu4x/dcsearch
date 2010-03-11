@@ -1,0 +1,7 @@
+RewriteEngine on
+RewriteRule .*\.svn/.* - [F]
+RewriteRule .*\inc/.* - [F]
+RewriteRule .*\install/.* - [F]
+RewriteRule .*\scripts/.* - [F]
+RewriteRule .*\tmp/.* - [F]
+RewriteRule .*\tpl/.* - [F]
