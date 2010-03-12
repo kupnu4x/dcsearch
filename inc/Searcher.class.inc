@@ -46,6 +46,7 @@ class Searcher {
         foreach($files as &$file) {
             $file['type'] = self::getType($file['extension']);
             $file['magnet'] = self::getMagnet($file);
+            $file['lasttime'] = date('YYYY-mm-dd HH:ii:ss', $file['lasttime']);
         }
         return $files;
     }
@@ -70,6 +71,7 @@ class Searcher {
         foreach($files as &$file) {
             $file['type'] = self::getType($file['extension']);
             $file['magnet'] = self::getMagnet($file);
+            $file['lasttime'] = date('YYYY-mm-dd HH:ii:ss', $file['lasttime']);
         }
         return $files;
     }
