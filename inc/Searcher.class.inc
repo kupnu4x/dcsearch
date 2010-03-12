@@ -34,7 +34,9 @@ class Searcher {
                 files.name,
                 files.fullpath,
                 files.extension,
+                files.starttime,
                 users.nick,
+                users.lastlisttime as lasttime,
                 '1' as rowtype_tth
             from files,users
             where
@@ -56,7 +58,9 @@ class Searcher {
                 files.name,
                 files.fullpath,
                 files.extension,
+                files.starttime,
                 users.nick,
+                users.lastlisttime as lasttime,
                 '1' as rowtype_file
             from files,users
             where
