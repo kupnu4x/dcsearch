@@ -41,9 +41,12 @@
         border-bottom:1px solid #808080;
         font-family:Arial;
         font-size:13px;
-        line-height:23px;
+        line-height:28px;
         color:#505050;
         padding-left:25px
+    }
+    #filter form{
+        margin:0;
     }
     #filter input{
         text-align: center;

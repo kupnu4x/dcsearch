@@ -142,7 +142,7 @@ class Searcher {
             );
         if($selected){
             foreach($array as $i=>$row) {
-                if($row['value']==$selected){
+                if($row['key']==$selected){
                     $array[$i]['selected'] = true;
                 }
             }
