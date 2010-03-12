@@ -5,6 +5,7 @@ require_once(dirname(__FILE__).'/Sphinx/SphinxApi.php');
 require_once(dirname(__FILE__).'/DC.class.inc');
 require_once(dirname(__FILE__).'/Indexer.class.inc');
 require_once(dirname(__FILE__).'/Searcher.class.inc');
+require_once(dirname(__FILE__).'/Memcache.class.inc');
 
 define('DEBUG',0);
 
