@@ -701,50 +701,50 @@ class DC_P2P extends DC {
     public function authenticateBack( $wantedNickName ){
         $MyNick = $this->waitForCommand('MyNick');
         if(!$MyNick){
-            echo "not awaited mynick\n";
+            $this->lasterror = "not awaited mynick";
             return false;
         }
         if($MyNick->params[0] != $wantedNickName){
-            echo $MyNick->params[0]." instead of $wantedNickName\n";
+            $this->lasterror = $MyNick->params[0]." instead of $wantedNickName";
             return false;
         }
 
         if( !$this->sendCommand('MyNick '.$this->nickname) ) {
-            echo "not sended mynick\n";
+            $this->lasterror = "not sended mynick";
             return false;
         }
 
         if( !$this->sendCommand('Lock '.self::generateLock().
             ' Pk='.self::generatePk()) ) {
-            echo "not sended lock\n";
+            $this->lasterror = "not sended lock";
             return false;
         }
 
         $Lock = $this->waitForCommand('Lock');
         if(!$Lock){
-            echo "not awaited lock\n";
+            $this->lasterror = "not awaited lock";
             return false;
         }
         if( !$this->sendCommand('Key '.self::lock2key($Lock->params[0])) ) {
-            echo "not sended key\n";
+            $this->lasterror = "not sended key";
             return false;
         }
         
         $Direction = $this->waitForCommand('Direction');
         if(!$Direction){
-            echo "not awaited direction\n";
+            $this->lasterror = "not awaited direction";
             return false;
         }
 
         $myrand = mt_rand(0, 0x7FFF);
         if( !$this->sendCommand("Direction Download $myrand") ) {
-            echo "not sended direction\n";
+            $this->lasterror = "not sended direction";
             return false;
         }
 
         $Key = $this->waitForCommand('Key');
         if(!$Key){
-            echo "not awaited key\n";
+            $this->lasterror = "not awaited key";
             return false;
         }
 

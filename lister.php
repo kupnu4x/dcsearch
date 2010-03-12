@@ -104,7 +104,7 @@ function getFileList($DC, $nick){
     
     $bz2Content = $DC->getFile($nick, 'files.xml.bz2');
     if($DC->connectedBack){
-        echo " backconnect ".$DC->connectedBack." - ";
+        printlog(1, " backconnect ".$DC->connectedBack." - ");
         $DC->connectedBack = false;
     }
     if($bz2Content === false){
