@@ -47,6 +47,7 @@ class Searcher {
             $file['type'] = self::getType($file['extension']);
             $file['magnet'] = self::getMagnet($file);
             $file['lasttime'] = date('Y-m-dd H:i:s', $file['lasttime']);
+            $file['size'] = self::HumanSize($file['size']);
         }
         return $files;
     }
@@ -72,6 +73,7 @@ class Searcher {
             $file['type'] = self::getType($file['extension']);
             $file['magnet'] = self::getMagnet($file);
             $file['lasttime'] = date('Y-m-d H:i:s', $file['lasttime']);
+            $file['size'] = self::HumanSize($file['size']);
         }
         return $files;
     }
@@ -88,6 +90,18 @@ class Searcher {
                 dirs.id in (?a) and
                 dirs.user_id=users.id",
                 $ids);
+    }
+
+    public static function HumanSize($size){
+        if($size<1024) return $size."B";
+        $size = round($size/1024);
+        if($size<1024) return $size."KB";
+        $size = round($size/1024);
+        if($size<1024) return $size."MB";
+        $size = round($size/1024);
+        if($size<1024) return $size."GB";
+        $size = round($size/1024);
+        return $size."TB";
     }
 
     public static function getMagnet($file){
