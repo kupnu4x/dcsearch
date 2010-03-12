@@ -283,6 +283,9 @@ abstract class DC {
                 //TODO
                 echo "RevConnectToMe received\n";
                 return true;
+            case 'OpList':
+                //TODO
+                return true;
             case 'MaxedOut':
                 //TODO
                 return true;
