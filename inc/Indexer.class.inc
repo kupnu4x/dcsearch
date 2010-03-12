@@ -39,6 +39,8 @@ class Indexer {
         }
 
         $DB = self::getDB();
+        //first update lastseed value
+        $DB->query('update users set lastseedtime=unix_timestamp() where nick in (?a)',$serverNicks);
         //select users we don't need
         $bdNicks = $DB->selectCol("select nick
                 from users
