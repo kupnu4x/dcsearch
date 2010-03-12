@@ -88,7 +88,7 @@ if($query){
     $tpl_values['category'] = htmlspecialchars($category);
     $tpl_values['days'] = htmlspecialchars($days);
 
-    //list($results, $total_results, $time) = Searcher::getLatest($category,$days,$page,RPP);
+    list($results, $total_results, $time) = Searcher::getLatest($category,$days,$page,RPP);
     $total_pages = min(ceil(1000/RPP),ceil( ($total_results)/RPP ));
     if($total_pages>1){
         $pagination = array_fill(1, $total_pages, array('selected'=>false,'query'=>urlencode($query)));
