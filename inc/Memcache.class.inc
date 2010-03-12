@@ -9,7 +9,7 @@ class MC {
      */
     private static function getMCObj(){
         if(!self::$MCObj){
-            self::$MCObj = new Memcache();
+            self::$MCObj = new Memcached();
             self::$MCObj->addServer(MC_HOST,MC_PORT);
         }
         return self::$MCObj;
