@@ -106,6 +106,7 @@ if($query){
             $tpl_values['nextlink'] = '?p='.($page+1).'&cat='.urlencode($category).'&d='.$days;
         }
     }
+    if(!count($results))$tpl_values['nofound'] = true;
     $tpl_values['results'] = $results;
     $tpl_values['time'] = $time;
     $tpl_values['powered_mysql'] = true;
