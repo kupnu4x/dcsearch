@@ -139,7 +139,8 @@ class Searcher {
                     id>=? and
                     extension in (?a) and
                     not exists (select 1 from files temptable where id<? and temptable.tth=f.tth)
-                order by id desc',
+                order by id desc
+                limit 0,1000',
                 $id,$exts,$id);
             MC::set('latest_'.$category.'_'.$days, $ids);
         }
