@@ -87,8 +87,9 @@ if($query){
 }elseif($category && $days){
     $tpl_values['category'] = htmlspecialchars($category);
     $tpl_values['days'] = htmlspecialchars($days);
+    $categories = Searcher::getCategories($category);
     $tpl_values['filter_last'] = array(
-        'categories'=>Searcher::getCategories(),
+        'categories'=>$categories,
         'category'=>$category,
         'days'=>$days
     );

@@ -127,8 +127,8 @@ class Searcher {
         return 'file';
     }
 
-    public static function getCategories(){
-        return array(
+    public static function getCategories($selected = false){
+        $array = array(
             array('key'=>'video'     ,'value'=>'Videos'),
             array('key'=>'audio'     ,'value'=>'Audios'),
             array('key'=>'picture'   ,'value'=>'Pictures'),
@@ -140,6 +140,14 @@ class Searcher {
             array('key'=>'archives'  ,'value'=>'Archives'),
             array('key'=>'inifiles'  ,'value'=>'Ini & Config files')
             );
+        if($selected){
+            foreach($array as &$row) {
+                if($row['value']==$selected){
+                    $row['selected'] = true;
+                }
+            }
+        }
+        return $array;
     }
 
     public static function getExts($category){
