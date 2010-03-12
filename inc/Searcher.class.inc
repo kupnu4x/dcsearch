@@ -162,7 +162,7 @@ class Searcher {
                 order by id desc
                 limit 0,1000',
                 $id,$exts,$id);
-            MC::set('latest_'.$category.'_'.$days, $ids);
+            MC::set('latest_'.$category.'_'.$days, $ids, 24*60*60);
         }
         return $ids;
     }

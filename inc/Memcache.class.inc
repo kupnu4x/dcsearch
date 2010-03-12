@@ -20,9 +20,9 @@ class MC {
         return $MC->get($key);
     }
 
-    public static function set($key,$var){
+    public static function set($key,$var,$expire=0){
         $MC = self::getMCObj();
-        return $MC->set($key, $var);
+        return $MC->set($key, $var, $expire);
     }
     
 }
