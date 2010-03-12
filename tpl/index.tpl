@@ -133,7 +133,7 @@
             {{if rowtype_tth}}
                 <img src="img/tth.png" class="type" alt="TTH" /> //{{nick}}/{{fullpath}}/{{name}}.{{extension}}<br/>
                 <small>Size: {{size}}, TTH: <b>{{tth}}</b> <a href="{{magnet}}"><img src="img/magnet.png" class="magnet" alt="magnet link" /></a> </small><br/>
-                <small style="color:#999">In index since {{starttime}}, last seed {{lasttime}}</small>
+                <small style="color:#999">In index since {{starttime}}, Last seed {{lasttime}}</small>
             {{end}}
             {{if rowtype_dir}}
                 <img src="img/folder.png" class="type" alt="dir" /> //{{nick}}/{{fullpath}}/<b>{{name}}</b>/<br/>
@@ -142,7 +142,7 @@
             {{if rowtype_file}}
                 <img src="img/{{type}}.png" class="type" alt="file" /> //{{nick}}/{{fullpath}}/<b>{{name}}.{{extension}}</b><br/>
                 <small>Size: {{size}}, TTH: {{tth}} <a href="{{magnet}}"><img src="img/magnet.png" class="magnet" alt="magnet link" /></a> </small><br/>
-                <small style="color:#999">In index since {{starttime}}, last seed {{lasttime}}</small>
+                <small style="color:#999">In index since {{starttime}}, Last seed {{lasttime}}</small>
             {{end}}
             <br class="clear"/>
             </div>
