@@ -120,7 +120,7 @@
         {{if viewlast_categories}}
             View latest:<br/>
             {{begin viewlast_categories}}
-                <a href="{{key}}">{{value}}</a><br/>
+                <a href="?cat={{key}}&d=7">{{value}}</a><br/>
             {{end}}
         {{end}}
 
@@ -153,12 +153,15 @@
         {{if pagination}}
         <div id="pagination">
             {{begin pagination_search}}
-            {{unless selected}}<a href="?{{unless $_first}}p={{$_num}}&{{end}}q={{query}}">{{$_num}}</a>{{end}}
-            {{if selected}}<b>{{$_num}}</b>{{end}}
-            {{unless $_last}}, {{end}}
+                {{unless selected}}<a href="?{{unless $_first}}p={{$_num}}&{{end}}q={{query}}">{{$_num}}</a>{{end}}
+                {{if selected}}<b>{{$_num}}</b>{{end}}
+                {{unless $_last}}, {{end}}
             {{end}}
+
             {{begin pagination_viewlast}}
-            pagination_viewlast
+                {{unless selected}}<a href="?{{unless $_first}}p={{$_num}}&{{end}}cat={{category}}&d={{days}}">{{$_num}}</a>{{end}}
+                {{if selected}}<b>{{$_num}}</b>{{end}}
+                {{unless $_last}}, {{end}}
             {{end}}
             <br class="clear"/>
             <span class="ctrlhint">

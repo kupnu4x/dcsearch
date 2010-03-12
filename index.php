@@ -6,13 +6,16 @@ require_once(dirname(__FILE__).'/inc/config.inc');
 $page = isset($_GET['p'])?(int)$_GET['p']:1;
 $query = isset($_GET['q'])?(string)$_GET['q']:'';
 $category = isset($_GET['cat'])?(string)$_GET['cat']:'';
+$days = isset($_GET['d'])?(int)$_GET['d']:7;
+$days = max($days,1);
 
 $T = new Blitz();
 $T->load(file_get_contents('tpl/index.tpl'));
 $tpl_values = array();
 $tpl_values['page'] = $page;
-$tpl_values['query'] = htmlspecialchars($query);
 if($query){
+    $tpl_values['query'] = htmlspecialchars($query);
+    
     $searcher = new SphinxClient();
     $searcher->setServer("localhost", 3312);
     $searcher->setMatchMode(SPH_MATCH_ALL);
@@ -81,8 +84,31 @@ if($query){
     $tpl_values['results'] = $out_array;
     $tpl_values['time'] = $tths_result['time']+$dirs_result['time']+$files_result['time'];
     $tpl_values['powered_sphinx'] = true;
-}elseif(0){
+}elseif($category && $days){
+    $tpl_values['category'] = htmlspecialchars($category);
+    $tpl_values['days'] = htmlspecialchars($days);
 
+    //list($results, $total_results, $time) = Searcher::getLatest($category,$days,$page,RPP);
+    $total_pages = min(ceil(1000/RPP),ceil( ($total_results)/RPP ));
+    if($total_pages>1){
+        $pagination = array_fill(1, $total_pages, array('selected'=>false,'query'=>urlencode($query)));
+        $pagination[$page]['selected'] = true;
+        $tpl_values['pagination'] = true;
+        $tpl_values['pagination_viewlast'] = $pagination;
+        if($page>1){
+            if($page==2){
+                $tpl_values['prevlink'] = '?cat='.urlencode($category).'&d='.$days;
+            }else{
+                $tpl_values['prevlink'] = '?p='.($page-1).'&cat='.urlencode($category).'&d='.$days;
+            }
+        }
+        if($page<$total_pages){
+            $tpl_values['nextlink'] = '?p='.($page+1).'&cat='.urlencode($category).'&d='.$days;
+        }
+    }
+    $tpl_values['results'] = $results;
+    $tpl_values['time'] = $time;
+    $tpl_values['powered_mysql'] = true;
 }else{
     $tpl_values['viewlast_categories'] = Searcher::getCategories();
 }
