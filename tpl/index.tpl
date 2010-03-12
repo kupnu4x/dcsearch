@@ -91,7 +91,7 @@
         float:right;
         font-family: Arial;
         font-size: 10px;
-        margin:3px 10px 0 0;
+        margin:10px 10px 0 0;
         text-align:right;
     }
     #copyright img{
@@ -126,23 +126,25 @@
 <body>
     <div id="top">
         <span id="logo"><a href="?">DCSearch</a></span>
+        {{unless hide_search_form}}
         <form method="get">
             <input type="text" name="q" id="q" value="{{query}}" />
             <input type="submit" value="search" />
         </form>
+        {{end}}
     </div>
     {{if filter_last}}
     <div id="filter">
         <form method="get">
         {{begin filter_last}}
-            Show all new
+            Show only
             <select name="cat">
                 {{begin categories}}
-                <option value="{{key}}" {{if selected}}selected="selected"{{end}} >{{value}}</option>
+                <option value="{{key}}" {{if selected}}selected {{end}}>{{value}}</option>
                 {{end}}
             </select>
             by last
-            <input type="text" name="d" value="{{days}}" size="3" maxlength="3" /> days
+            <input type="text" name="d" value="{{days}}" size="2" maxlength="2" /> days
         {{end}}
         <input type="submit" value="Go" />
         </form>

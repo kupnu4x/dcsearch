@@ -85,6 +85,7 @@ if($query){
     $tpl_values['time'] = $tths_result['time']+$dirs_result['time']+$files_result['time'];
     $tpl_values['powered_sphinx'] = true;
 }elseif($category && $days){
+    $tpl_values['hide_search_form'] = true;
     $tpl_values['category'] = htmlspecialchars($category);
     $tpl_values['days'] = htmlspecialchars($days);
     $categories = Searcher::getCategories($category);
