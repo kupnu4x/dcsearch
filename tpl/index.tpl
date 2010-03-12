@@ -80,7 +80,7 @@
         text-align:right;
     }
     #copyright img{
-        vertical-align: top;
+        vertical-align: bottom;
     }
     .clear{
         clear:both;
