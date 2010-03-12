@@ -44,7 +44,7 @@ try {
         Indexer::setNickList($nick, $fn);
     }
     unset($nick);
-    printlog(0, "Lists: $goodLists good,  $badLists bad\n");
+    printlog(0, "Lists: $goodLists good,  $badLists bad, ");
     printlog(0, round(microtime(true)-$starttime,2)."s\n");
 }catch (ForceMoveException $e) {
     printlog(0, "ForceMove received");
