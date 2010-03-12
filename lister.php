@@ -1,6 +1,5 @@
 <?
 set_time_limit(0);
-define('DEBUG', 1);
 
 $blacklist = array('Antimat','Stukach','Guard','Opers','SiskaOP');
 

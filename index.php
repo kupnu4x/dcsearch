@@ -1,6 +1,5 @@
 <?php
 set_time_limit(0);
-define('DEBUG', 1);
 define('RPP',50);
 require_once(dirname(__FILE__).'/inc/config.inc');
 
