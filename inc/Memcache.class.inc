@@ -1,5 +1,5 @@
 <?php
-class MС {
+class MC {
     /**
      * @var Memcache
      */
