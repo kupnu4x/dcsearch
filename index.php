@@ -5,6 +5,8 @@ require_once(dirname(__FILE__).'/inc/config.inc');
 
 $page = isset($_GET['p'])?(int)$_GET['p']:1;
 $query = isset($_GET['q'])?(string)$_GET['q']:'';
+$category = isset($_GET['cat'])?(string)$_GET['cat']:'';
+
 $T = new Blitz();
 $T->load(file_get_contents('tpl/index.tpl'));
 $tpl_values = array();
@@ -61,7 +63,8 @@ if($query){
     if($total_pages>1){
         $pagination = array_fill(1, $total_pages, array('selected'=>false,'query'=>urlencode($query)));
         $pagination[$page]['selected'] = true;
-        $tpl_values['pagination'] = $pagination;
+        $tpl_values['pagination'] = true;
+        $tpl_values['pagination_search'] = $pagination;
         if($page>1){
             if($page==2){
                 $tpl_values['prevlink'] = '?q='.urlencode($query);
@@ -77,6 +80,11 @@ if($query){
     if(!count($out_array))$tpl_values['nofound'] = true;
     $tpl_values['results'] = $out_array;
     $tpl_values['time'] = $tths_result['time']+$dirs_result['time']+$files_result['time'];
+    $tpl_values['powered_sphinx'] = true;
+}elseif(0){
+
+}else{
+    $tpl_values['viewlast_categories'] = Searcher::getCategories();
 }
 $T->set($tpl_values);
 echo $T->parse();

@@ -12,6 +12,10 @@ define('DB_HOST','localhost');
 define('DB_USER','dcsearch');
 define('DB_PASS','dc4pass');
 define('DB_NAME','dcsearch');
+
+define('MC_HOST','localhost');
+define('MC_PORT','11211');
+
 define('INTERVAL_NICKNAME', 60*60*24);
 define('INTERVAL_NICKNAME_DIE',60*60*24*14);
 define('MIN_FILESIZE',1024*1024);//1mb
@@ -24,7 +28,7 @@ define('BOT_VERSION','<FlylinkDC++ V:(r394),M:A,H:1/0/0,S:15>');
 define('BOT_TCP_PORT',18887);
 
 define('FIX_HUB_CP1251',true);
-define('CONSOLE_OUT_CHARSET','cp866');//empty for utf
+define('CONSOLE_OUT_CHARSET','koi8-r');//empty for utf
 
 define('DC_SERVER','172.16.22.1');
 define('DC_PORT',4111);

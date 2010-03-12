@@ -1,6 +1,19 @@
 <?php
 class Searcher {
     private static $DB;
+    private static $video_exts     = array('avi','wmv','vob','flv','mpg','mp4','mkv','mov','mpeg','3gp','asf',
+                                        'mpe', 'rm', 'divx');
+    private static $audio_exts     = array('mp3','wav','ogg','wma','flac','mid','aac','amr');
+    private static $picture_exts   = array('jpg','gif','png','bmp','ico','swf','jpeg','tif','tiff','cdr','psd',
+                                        '3ds','jpe');
+    private static $images_exts    = array('vcd','iso','img','mds','mdf','nrg','image','cue');
+    private static $documents_exts = array('htm','html','txt','doc','chm','rtf','fb2','pdf','djvu','xls','ppt',
+                                        'mht','odt','ods','odp','docx','xlsx','pptx');
+    private static $programs_exts  = array('exe','msi');
+    private static $sysfiles_exts  = array('dll','ovl','dat','cab','sys','bat','cmd','com','ocx','obj');
+    private static $satellites_exts= array('js','css','xml');
+    private static $archives_exts  = array('rar','zip','7z','uha','tar','gz','bz2','tgz');
+    private static $inifiles_exts  = array('ini','lst','inf','ifo','cfg','nfo','config','conf','info');
     /**
      * @return DbSimple_Mysql
      */
@@ -81,40 +94,37 @@ class Searcher {
 
     public static function getType($extension){
         $extension = strtolower($extension);
-        $videos = array('avi','wmv','vob','flv','mpg','mp4','mkv','mov','mpeg','3gp','asf',
-            'mpe', 'rm', 'divx');
-        if(in_array($extension, $videos)) return 'video';
-
-        $audios = array('mp3','wav','ogg','wma','flac','mid','aac','amr');
-        if(in_array($extension,$audios)) return 'audio';
-
-        $pictures = array('jpg','gif','png','bmp','ico','swf','jpeg','tif','tiff','cdr','psd',
-            '3ds','jpe');
-        if(in_array($extension,$pictures)) return 'picture';
-
-        $images = array('vcd','iso','img','mds','mdf','nrg','image','cue');
-        if(in_array($extension,$images)) return 'image';
-
-        $documents = array('htm','html','txt','doc','chm','rtf','fb2','pdf','djvu','xls','ppt',
-            'mht','odt','ods','odp','docx','xlsx','pptx');
-        if(in_array($extension,$documents)) return 'document';
-
-        $programs = array('exe','msi');
-        if(in_array($extension,$programs)) return 'program';
-
-        $sysfiles = array('dll','ovl','dat','cab','sys','bat','cmd','com','ocx','obj');
-        if(in_array($extension, $sysfiles)) return 'sysfile';
-
-        $satellites = array('js','css','xml');
-        if(in_array($extension, $satellites)) return 'satellite';
-
-        $archives = array('rar','zip','7z','uha','tar','gz','bz2','tgz');
-        if(in_array($extension, $archives)) return 'archive';
-
-        $inifiles = array('ini','lst','inf','ifo','cfg','nfo','config','conf','info');
-        if(in_array($extension, $inifiles)) return 'inifile';
-
+        if(in_array($extension, self::$video_exts))      return 'video';
+        if(in_array($extension, self::$audio_exts))      return 'audio';
+        if(in_array($extension, self::$picture_exts))    return 'picture';
+        if(in_array($extension, self::$images_exts))     return 'image';
+        if(in_array($extension, self::$documents_exts))  return 'document';
+        if(in_array($extension, self::$programs_exts))   return 'program';
+        if(in_array($extension, self::$sysfiles_exts))   return 'sysfile';
+        if(in_array($extension, self::$satellites_exts)) return 'satellite';
+        if(in_array($extension, self::$archives_exts))   return 'archive';
+        if(in_array($extension, self::$inifiles_exts))   return 'inifile';
         return 'file';
+    }
+
+    public static function getCategories(){
+        return array(
+            array('key'=>'video'     ,'value'=>'Videos'),
+            array('key'=>'audio'     ,'value'=>'Audios'),
+            array('key'=>'picture'   ,'value'=>'Pictures'),
+            array('key'=>'images'    ,'value'=>'CD Images'),
+            array('key'=>'documents' ,'value'=>'Txt & Office documents'),
+            array('key'=>'programs'  ,'value'=>'Programs'),
+            array('key'=>'sysfiles'  ,'value'=>'System files'),
+            //array('key'=>'satellites','value'=>'satellites'),
+            array('key'=>'archives'  ,'value'=>'Archives'),
+            array('key'=>'inifiles'  ,'value'=>'Ini & Config files')
+            );
+    }
+
+    public static function getExts($category){
+        $array = self::${$category."_exts"};
+        return $array;
     }
 }
 ?>

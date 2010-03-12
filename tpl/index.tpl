@@ -117,9 +117,17 @@
         </form>
     </div>
     <div id="results">
-        {{if nofound}}
-        Sorry, no matches found
+        {{if viewlast_categories}}
+            View latest:<br/>
+            {{begin viewlast_categories}}
+                <a href="{{key}}">{{value}}</a><br/>
+            {{end}}
         {{end}}
+
+        {{if nofound}}
+            Sorry, no matches found
+        {{end}}
+        
         {{begin results}}
             <div class="result">
             {{if rowtype_tth}}
@@ -144,10 +152,13 @@
     <div id="footer">
         {{if pagination}}
         <div id="pagination">
-            {{begin pagination}}
+            {{begin pagination_search}}
             {{unless selected}}<a href="?{{unless $_first}}p={{$_num}}&{{end}}q={{query}}">{{$_num}}</a>{{end}}
             {{if selected}}<b>{{$_num}}</b>{{end}}
             {{unless $_last}}, {{end}}
+            {{end}}
+            {{begin pagination_viewlast}}
+            pagination_viewlast
             {{end}}
             <br class="clear"/>
             <span class="ctrlhint">
@@ -159,10 +170,18 @@
             </span>
         </div>
         {{end}}
+        {{if powered_sphinx}}
         <div id="copyright">
             Powered by Sphinx <img src="img/sphinx.gif" alt="sphinx" /><br/>
             {{time}}s
         </div>
+        {{end}}
+        {{if powered_mysql}}
+        <div id="copyright">
+            Powered by MySQL <img src="img/mysql.gif" alt="mysql" /><br/>
+            {{time}}s
+        </div>
+        {{end}}
         <br class="clear"/>
     </div>
     {{end}}

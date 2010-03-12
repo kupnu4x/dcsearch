@@ -6,12 +6,16 @@ require_once(dirname(__FILE__).'/DC.class.inc');
 require_once(dirname(__FILE__).'/Indexer.class.inc');
 require_once(dirname(__FILE__).'/Searcher.class.inc');
 
-define('DEBUG',0);
+define('DEBUG',1);
 
 define('DB_HOST','localhost');
 define('DB_USER','dcsearch');
 define('DB_PASS','dc4pass');
 define('DB_NAME','dcsearch');
+
+define('MC_HOST','localhost');
+define('MC_PORT','11211');
+
 define('INTERVAL_NICKNAME', 60*60*24);
 define('INTERVAL_NICKNAME_DIE',60*60*24*14);
 define('MIN_FILESIZE',1024*1024);//1mb
