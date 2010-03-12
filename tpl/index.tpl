@@ -36,6 +36,15 @@
     #q{
         width:500px;
     }
+    #filter{
+        background:#e0e0e0;
+        border-bottom:1px solid #808080;
+        font-family:Arial;
+        font-size:13px;
+        line-height:23px;
+        color:#505050;
+        padding-left:25px
+    }
     #results{
         font-family: Arial;
         font-size: 12px;
@@ -116,6 +125,13 @@
             <input type="submit" value="search" />
         </form>
     </div>
+    {{if filter_last}}
+    <div id="filter">
+        {{begin filter_last}}
+        Последние: {{category}} {{days}}
+        {{end}}
+    </div>
+    {{end}}
     <div id="results">
         {{if viewlast_categories}}
             View latest:<br/>

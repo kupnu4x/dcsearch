@@ -87,6 +87,11 @@ if($query){
 }elseif($category && $days){
     $tpl_values['category'] = htmlspecialchars($category);
     $tpl_values['days'] = htmlspecialchars($days);
+    $tpl_values['filter_last'] = array(
+        'categories'=>Searcher::getCategories(),
+        'category'=>$category,
+        'days'=>$days
+    );
 
     list($results, $total_results, $time) = Searcher::getLatest($category,$days,$page,RPP);
     $total_pages = ceil( ($total_results)/RPP );
