@@ -24,7 +24,7 @@ if(is_array($usersToProcess) && count($usersToProcess)){
     foreach($usersToProcess as $user) {
     //$user = $usersToProcess[1];
         if(CONSOLE_OUT_CHARSET){
-            printlog(1, iconv('utf-8', CONSOLE_OUT_CHARSET, $user['nick']));
+            printlog(1, @iconv('utf-8', CONSOLE_OUT_CHARSET, $user['nick']));
         }else{
             printlog(1, $user['nick']);
         }

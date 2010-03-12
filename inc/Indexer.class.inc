@@ -34,7 +34,7 @@ class Indexer {
     public static function getNeedNicks($serverNicks){
         if(FIX_HUB_CP1251){
             foreach($serverNicks as $k=>$v) {
-                $serverNicks[$k] = iconv('cp1251', 'utf-8', $v);
+                $serverNicks[$k] = @iconv('cp1251', 'utf-8', $v);
             }
         }
 

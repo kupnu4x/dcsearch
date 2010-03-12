@@ -24,7 +24,7 @@ try {
     printlog(1, 'We are interested in ');
     foreach($nickList as $k=>$v) {
         if(CONSOLE_OUT_CHARSET){
-            printlog(1, iconv('utf-8', CONSOLE_OUT_CHARSET, $v)." ");
+            printlog(1, @iconv('utf-8', CONSOLE_OUT_CHARSET, $v)." ");
         }else{
             printlog(1, $v." ");
         }
@@ -97,7 +97,7 @@ function getFileList($DC, $nick){
     $st = microtime(true);
 
     if(CONSOLE_OUT_CHARSET){
-        printlog(1, iconv('utf-8',CONSOLE_OUT_CHARSET,$nick)." - ");
+        printlog(1, @iconv('utf-8',CONSOLE_OUT_CHARSET,$nick)." - ");
     }else{
         printlog(1, $nick." - ");
     }

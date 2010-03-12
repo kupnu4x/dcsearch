@@ -40,7 +40,7 @@ class DCConnection{
             return false;
         }
         if( !@socket_connect($this->socket, $server, $port) ) {
-            //echo iconv('cp1251', 'cp866',  socket_strerror(socket_last_error($this->socket)) );
+            //echo @iconv('cp1251', 'cp866',  socket_strerror(socket_last_error($this->socket)) );
             //echo "not socket_connect!\n";
             return false;
         }
@@ -488,7 +488,7 @@ class DC_P2S extends DC {
 
     public function getFile($nickName, $fileName) {
         if(FIX_HUB_CP1251){
-            $nickName = iconv('utf-8','cp1251',$nickName);
+            $nickName = @iconv('utf-8','cp1251',$nickName);
         }
         $this->client = new DC_P2P($this->nickname, $this->myport);
         if( !$this->client->bind() ) {
