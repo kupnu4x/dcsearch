@@ -47,9 +47,9 @@ try {
     printlog(0, "Lists: $goodLists good,  $badLists bad, ");
     printlog(0, round(microtime(true)-$starttime,2)."s\n");
 }catch (ForceMoveException $e) {
-    printlog(0, "ForceMove received");
+    printlog(0, "ForceMove received\n");
 }catch (ErrorReceivedException $e) {
-    printlog(0, "Error received");
+    printlog(0, "Error received\n");
 }
 
 //$DC->LoopProcessing();
