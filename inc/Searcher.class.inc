@@ -133,17 +133,17 @@ class Searcher {
             array('key'=>'audio'     ,'value'=>'Audios'),
             array('key'=>'picture'   ,'value'=>'Pictures'),
             array('key'=>'images'    ,'value'=>'CD Images'),
-            array('key'=>'documents' ,'value'=>'Txt & Office documents'),
+            array('key'=>'documents' ,'value'=>'Documents'),
             array('key'=>'programs'  ,'value'=>'Programs'),
             array('key'=>'sysfiles'  ,'value'=>'System files'),
             //array('key'=>'satellites','value'=>'satellites'),
             array('key'=>'archives'  ,'value'=>'Archives'),
-            array('key'=>'inifiles'  ,'value'=>'Ini & Config files')
+            array('key'=>'inifiles'  ,'value'=>'Config files')
             );
         if($selected){
-            foreach($array as &$row) {
+            foreach($array as $i=>$row) {
                 if($row['value']==$selected){
-                    $row['selected'] = true;
+                    $array[$i]['selected'] = true;
                 }
             }
         }

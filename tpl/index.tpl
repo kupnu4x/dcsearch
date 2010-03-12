@@ -45,6 +45,9 @@
         color:#505050;
         padding-left:25px
     }
+    #filter input{
+        text-align: center;
+    }
     #results{
         font-family: Arial;
         font-size: 12px;
@@ -129,16 +132,16 @@
     <div id="filter">
         <form method="get">
         {{begin filter_last}}
-            Latest:
+            Show all new
             <select name="cat">
                 {{begin categories}}
                 <option value="{{key}}" {{if selected}}selected="selected"{{end}} >{{value}}</option>
                 {{end}}
             </select>
-            {{category}}
+            by last
             <input type="text" name="d" value="{{days}}" size="3" maxlength="3" /> days
         {{end}}
-        <input type="submit" value="ok" />
+        <input type="submit" value="Go" />
         </form>
     </div>
     {{end}}
