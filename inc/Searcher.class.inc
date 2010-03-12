@@ -93,14 +93,14 @@ class Searcher {
     }
 
     public static function HumanSize($size){
-        if($size<1024) return $size."B";
-        $size = round($size/1024);
-        if($size<1024) return $size."KB";
-        $size = round($size/1024);
-        if($size<1024) return $size."MB";
-        $size = round($size/1024);
-        if($size<1024) return $size."GB";
-        $size = round($size/1024);
+        if($size<1024) return $size." B";
+        $size = round($size/1024,2);
+        if($size<1024) return $size." KB";
+        $size = round($size/1024,2);
+        if($size<1024) return $size." MB";
+        $size = round($size/1024,2);
+        if($size<1024) return $size." GB";
+        $size = round($size/1024,2);
         return $size."TB";
     }
 
