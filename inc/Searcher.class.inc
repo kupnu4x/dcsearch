@@ -151,7 +151,7 @@ class Searcher {
         $ids = self::getLatestIds($category, $days);
         $total_results = count($ids);
         $ids = array_splice($ids, ($page-1)*$RPP, $RPP);
-        $results = self::getFiles($results);
+        $results = self::getFiles($ids);
         $et = microtime(true);
         $time = round($et-$st,3);
         return array($results, $total_results, $time);
