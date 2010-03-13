@@ -6,7 +6,7 @@ require_once(dirname(__FILE__).'/inc/config.inc');
 $page = isset($_GET['p'])?(int)$_GET['p']:1;
 $query = isset($_GET['q'])?(string)$_GET['q']:'';
 $category = isset($_GET['cat'])?(string)$_GET['cat']:'';
-$days = isset($_GET['d'])?(int)$_GET['d']:7;
+$days = isset($_GET['d'])?(int)$_GET['d']:0;
 $days = max($days,0);
 $extsearch = isset($_GET['extsearch'])?(bool)$_GET['extsearch']:false;
 $nodirs = isset($_GET['nodirs'])?(bool)$_GET['nodirs']:false;
@@ -47,18 +47,26 @@ if($query || $extsearch){
             $out_array = array_merge($out_array,$tths);
         }
 
-        //DIRS
-        $prev_instanses_count += $total_tths;
-        $start = max(0,$min-$prev_instanses_count);
-        $len = min(RPP, max(1,$max-$prev_instanses_count) );
-        $searcher->setLimits( $start, $len );
-        $dirs_result = $searcher->query($query,"dc_dirs dc_dirs_delta");
-        $total_dirs = $dirs_result['total'];
-        if($total_dirs && is_array($dirs_result['matches']) && count($out_array)<RPP){
-            $dirs = Searcher::getDirs(array_keys($dirs_result['matches']));
-            $out_array = array_merge($out_array,$dirs);
+        if(!$nodirs){
+            //DIRS
+            $prev_instanses_count += $total_tths;
+            $start = max(0,$min-$prev_instanses_count);
+            $len = min(RPP, max(1,$max-$prev_instanses_count) );
+            $searcher->setLimits( $start, $len );
+            $dirs_result = $searcher->query($query,"dc_dirs dc_dirs_delta");
+            $total_dirs = $dirs_result['total'];
+            if($total_dirs && is_array($dirs_result['matches']) && count($out_array)<RPP){
+                $dirs = Searcher::getDirs(array_keys($dirs_result['matches']));
+                $out_array = array_merge($out_array,$dirs);
+            }
         }
 
+        if($days){
+            $searcher->SetFilterRange("starttime", 0, time()-$days*24*60*60, true); //exclude too old results
+        }
+        if($category){
+            $searcher->SetFilter("extension", Searcher::getExts($category));
+        }
         //FILES
         $prev_instanses_count += $total_dirs;
         $start = max(0,$min-$prev_instanses_count);

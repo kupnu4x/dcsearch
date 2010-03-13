@@ -38,12 +38,16 @@
         margin-left:25px;
         position:relative;
         top:-5px;
+        font-family: Arial;
+        font-size: 12px;
     }
     #top form.extended{
         display: inline-block;
         vertical-align: top;
         background-color: #e0e0e0;
         border: 1px solid #808080;
+        top:0;
+        padding:10px;
     }
     #q{
         width:500px;
@@ -151,7 +155,7 @@
             <form method="get" class="extended">
                 <input type="hidden" name="extsearch" value="1" />
                 <input type="text" name="q" id="q" value="{{query}}" />
-                <input type="submit" value="search" /><br>
+                <input type="submit" value="search" /><br/>
 
                 Search in
                 <select name="cat">
@@ -161,7 +165,7 @@
                 </select>
 
                 by latest <input type="text" name="d" value="{{days}}" maxlength="2" size="2" />
-                <small>0 - no time limit</small><br>
+                <small>(0 - no time limit)</small><br/>
 
                 <input type="checkbox" name="nodirs" {{if nodirs}}checked{{end}} />
                        Do not search dirs
