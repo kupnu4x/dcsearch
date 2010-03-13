@@ -7,14 +7,21 @@ $page = isset($_GET['p'])?(int)$_GET['p']:1;
 $query = isset($_GET['q'])?(string)$_GET['q']:'';
 $category = isset($_GET['cat'])?(string)$_GET['cat']:'';
 $days = isset($_GET['d'])?(int)$_GET['d']:7;
-$days = max($days,1);
+$extsearch = isset($_GET['extsearch'])?(bool)$_GET['extsearch']:false;
+$nodirs = isset($_GET['nodirs'])?(bool)$_GET['nodirs']:false;
 
 $T = new Blitz();
 $T->load(file_get_contents('tpl/index.tpl'));
 $tpl_values = array();
 $tpl_values['page'] = $page;
 if($query){
+    $days = max($days,0);
+
     $tpl_values['query'] = htmlspecialchars($query);
+    $tpl_values['extsearch'] = $extsearch;
+    $tpl_values['nodirs'] = $nodirs;
+    $categories = Searcher::getCategories($category,true);
+    $tpl_values['categories'] = $categories;
     
     $searcher = new SphinxClient();
     $searcher->setServer("localhost", 3312);
@@ -85,13 +92,15 @@ if($query){
     $tpl_values['time'] = $tths_result['time']+$dirs_result['time']+$files_result['time'];
     $tpl_values['powered_sphinx'] = true;
 }elseif($category && $days){
+    $days = max($days,1);
+
     $tpl_values['hide_search_form'] = true;
     $tpl_values['category'] = htmlspecialchars($category);
     $tpl_values['days'] = htmlspecialchars($days);
     $categories = Searcher::getCategories($category);
     $tpl_values['filter_last'] = array(
         'categories'=>$categories,
-        'category'=>$category,
+        //'category'=>$category,
         'days'=>$days
     );
 

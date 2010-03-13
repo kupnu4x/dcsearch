@@ -127,19 +127,21 @@ class Searcher {
         return 'file';
     }
 
-    public static function getCategories($selected = false){
-        $array = array(
-            array('key'=>'video'     ,'value'=>'Videos'),
-            array('key'=>'audio'     ,'value'=>'Audios'),
-            array('key'=>'picture'   ,'value'=>'Pictures'),
-            array('key'=>'images'    ,'value'=>'CD Images'),
-            array('key'=>'documents' ,'value'=>'Documents'),
-            array('key'=>'programs'  ,'value'=>'Programs'),
-            array('key'=>'sysfiles'  ,'value'=>'System files'),
-            //array('key'=>'satellites','value'=>'satellites'),
-            array('key'=>'archives'  ,'value'=>'Archives'),
-            array('key'=>'inifiles'  ,'value'=>'Config files')
-            );
+    public static function getCategories($selected = false,$showall = false){
+        $array = array();
+        if($showall){
+            $array[] = array('key'=>''     ,'value'=>'All files');
+        }
+        $array[] = array('key'=>'video'     ,'value'=>'Videos');
+        $array[] = array('key'=>'audio'     ,'value'=>'Audios');
+        $array[] = array('key'=>'picture'   ,'value'=>'Pictures');
+        $array[] = array('key'=>'images'    ,'value'=>'CD Images');
+        $array[] = array('key'=>'documents' ,'value'=>'Documents');
+        $array[] = array('key'=>'programs'  ,'value'=>'Programs');
+        $array[] = array('key'=>'sysfiles'  ,'value'=>'System files');
+        //$array[] = array('key'=>'satellites','value'=>'satellites');
+        $array[] = array('key'=>'archives'  ,'value'=>'Archives');
+        $array[] = array('key'=>'inifiles'  ,'value'=>'Config files');
         if($selected){
             foreach($array as $i=>$row) {
                 if($row['key']==$selected){

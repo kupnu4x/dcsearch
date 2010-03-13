@@ -127,10 +127,35 @@
     <div id="top">
         <span id="logo"><a href="?">DCSearch</a></span>
         {{unless hide_search_form}}
-        <form method="get">
-            <input type="text" name="q" id="q" value="{{query}}" />
-            <input type="submit" value="search" />
-        </form>
+            {{unless extsearch}}
+            <form method="get">
+                <input type="text" name="q" id="q" value="{{query}}" />
+                <input type="submit" value="search" />
+            </form>
+            <a href="?extsearch=1">extended search</a>
+            {{end}}
+            
+            {{if extsearch}}
+            <form method="get">
+                <input type="hidden" name="extsearch" value="1" />
+                <input type="text" name="q" id="q" value="{{query}}" />
+                <input type="submit" value="search" /><br>
+
+                Search in
+                <select name="cat">
+                    {{begin categories}}
+                    <option value="{{key}}" {{if selected}}selected {{end}}>{{value}}</option>
+                    {{end}}
+                </select>
+
+                by latest <input type="text" name="d" value="{{days}}" maxlength="2" size="2" />
+                <small>0 - no time limit</small><br>
+
+                <input type="checkbox" name="nodirs" {{if nodirs}}checked{{end}} />
+                       Do not search dirs
+            </form>
+            <a href="?extsearch=1">normal search</a>
+            {{end}}
         {{end}}
     </div>
     {{if filter_last}}
