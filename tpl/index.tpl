@@ -78,6 +78,9 @@
         padding : 0 0 0 42px;
         line-height:18px;
     }
+    .result .tthlink{
+        color:#000;
+    }
     .result img.type{
         float:left;
         margin: 2px -32px 0 -42px;
@@ -216,7 +219,7 @@
             {{end}}
             {{if rowtype_file}}
                 <img src="img/{{type}}.png" class="type" alt="file" /> //{{nick}}/{{fullpath}}/<b>{{name}}.{{extension}}</b><br/>
-                <small>Size: {{size}}, TTH: {{tth}} <a href="{{magnet}}"><img src="img/magnet.png" class="magnet" alt="magnet link" /></a> </small><br/>
+                <small>Size: {{size}}, TTH: <a href="?q={{tth}}" class="tthlink">{{tth}}</a> <a href="{{magnet}}"><img src="img/magnet.png" class="magnet" alt="magnet link" /></a> </small><br/>
                 <small style="color:#999">In index since {{starttime}}, Last seed {{lasttime}}</small>
             {{end}}
             <br class="clear"/>
