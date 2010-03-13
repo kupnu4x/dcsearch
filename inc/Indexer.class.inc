@@ -59,14 +59,16 @@ class Indexer {
         $nickRow = $DB->selectRow('select * from users where nick=?',$nick);
         if($nickRow){
             $DB->query('update users
-                    set filename=?
+                    set filename=?,
+                    lastseedtime=unix_timestamp()
                     where id=?',
                     $list_fn, $nickRow['id']);
         }else{
             $DB->query('insert into users
                     set
                         nick=?,
-                        filename=?',
+                        filename=?,
+                        lastseedtime=unix_timestamp()',
                     $nick, $list_fn);
         }
     }
