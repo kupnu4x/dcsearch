@@ -14,8 +14,8 @@
     }
     #top{
         background-color: #4a4a4a;
-        height:50px;
         padding-top:5px;
+        padding-bottom: 5px;
     }
     #top a{
         color:#fff;
@@ -38,6 +38,12 @@
         margin-left:25px;
         position:relative;
         top:-5px;
+    }
+    #top form .extended{
+        display: inline-block;
+        vertical-align: top;
+        background-color: #e0e0e0;
+        border: 1px solid #808080;
     }
     #q{
         width:500px;
