@@ -170,10 +170,21 @@ class Searcher {
         return $array;
     }
 
-    public static function getLatestIds($category,$days){
+    public static function correctHumanSize($size){
+        return preg_match('/^\s*(\d+)([\.\,]\d*)?\s*(k|kb|m|mb|g|gb|t|tb)?\s*$/', $size);
+    }
+
+    public static function getSizeFromHuman($size){
+        preg_match('/^\s*(\d+)([\.\,]\d*)?\s*(k|kb|m|mb|g|gb|t|tb)?\s*$/', $size, $matches);
+        var_dump($matches);
+        return '0';
+    }
+
+    public static function getLatestIds($category,$days,$minsize){
         $DB = self::getDB();
         $maxid = $DB->selectCell('select max(id) from files');
-        $ids = MC::get('latest_'.$category.'_'.$days.'_'.$maxid);
+        $minsize = self::getSizeFromHuman($minsize);
+        $ids = MC::get('latest_'.$category.'_'.$days.'_'.$minsize.'_'.$maxid);
         if(!$ids){
             $exts = self::getExts($category);
             
@@ -183,18 +194,19 @@ class Searcher {
                 where
                     id>=? and
                     extension in (?a) and
+                    size>=?n and
                     not exists (select 1 from files temptable where id<? and temptable.tth=f.tth)
                 order by id desc
                 limit 0,1000',
-                $id,$exts,$id);
-            MC::set('latest_'.$category.'_'.$days.'_'.$maxid, $ids);
+                $id,$exts,$minsize,$id);
+            MC::set('latest_'.$category.'_'.$days.'_'.$minsize.'_'.$maxid, $ids);
         }
         return $ids;
     }
 
-    public static function getLatest($category,$days,$page,$RPP){
+    public static function getLatest($category,$days,$minsize,$page,$RPP){
         $st = microtime(true);
-        $ids = self::getLatestIds($category, $days);
+        $ids = self::getLatestIds($category, $days, $minsize);
         $total_results = count($ids);
         $ids = array_splice($ids, ($page-1)*$RPP, $RPP);
         $results = self::getFiles($ids);

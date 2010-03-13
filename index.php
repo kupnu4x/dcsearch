@@ -8,6 +8,10 @@ $query = isset($_GET['q'])?(string)$_GET['q']:'';
 $category = isset($_GET['cat'])?(string)$_GET['cat']:'';
 $days = isset($_GET['d'])?(int)$_GET['d']:0;
 $days = max($days,0);
+$minsize = isset($_GET['minsize'])?(string)$_GET['minsize']:'0';
+if(!Searcher::correctHumanSize($minsize)){
+    $minsize = '0';
+}
 $extsearch = isset($_GET['extsearch'])?(bool)$_GET['extsearch']:false;
 $nodirs = isset($_GET['nodirs'])?(bool)$_GET['nodirs']:false;
 
@@ -112,10 +116,11 @@ if($query || $extsearch){
     $tpl_values['filter_last'] = array(
         'categories'=>$categories,
         //'category'=>$category,
-        'days'=>$days
+        'days'=>$days,
+        'minsize'=>$minsize
     );
 
-    list($results, $total_results, $time) = Searcher::getLatest($category,$days,$page,RPP);
+    list($results, $total_results, $time) = Searcher::getLatest($category,$days,$minsize,$page,RPP);
     $total_pages = ceil( ($total_results)/RPP );
     if($total_pages>1){
         $pagination = array_fill(1, $total_pages, array('selected'=>false,'category'=>urlencode($category),'days'=>urlencode($days)));

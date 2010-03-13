@@ -191,6 +191,8 @@
             </select>
             by last
             <input type="text" name="d" value="{{days}}" size="2" maxlength="2" /> days
+            with min size
+            <input type="text" name="minsize" value="{{minsize}}" />
         {{end}}
         <input type="submit" value="Go" />
         </form>
