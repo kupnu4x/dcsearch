@@ -171,13 +171,25 @@ class Searcher {
     }
 
     public static function correctHumanSize($size){
-        return preg_match('/^\s*(\d+)([\.\,]\d*)?\s*(k|kb|m|mb|g|gb|t|tb)?\s*$/i', $size);
+        return (bool)preg_match('/^\s*(\d+)([\.\,]\d*)?\s*(k|kb|m|mb|g|gb|t|tb)?\s*$/i', $size);
     }
 
     public static function getSizeFromHuman($size){
-        preg_match('/^\s*(\d+)([\.\,]\d*)?\s*(k|kb|m|mb|g|gb|t|tb)?\s*$/i', $size, $matches);
-        var_dump($matches);
-        return '0';
+        preg_match('/^\s*(\d+)([\.\,]\d*)?\s*(b|k|kb|m|mb|g|gb|t|tb)?\s*$/i', $size, $matches);
+        $number = (int)$matches[1];
+        if($matches[2]){
+            $matches[2] = str_replace(',', '.', $matches[2]);
+            $number += (float)"0".$matches[2];
+        }
+        if($matches[3]){
+            $matches[3] = strtolower($matches[3]);
+                if($matches[3]=='k'||$matches[3]=='kb') $number *= 1024;
+            elseif($matches[3]=='m'||$matches[3]=='mb') $number *= 1024*1024;
+            elseif($matches[3]=='g'||$matches[3]=='gb') $number *= 1024*1024*1024;
+            elseif($matches[3]=='t'||$matches[3]=='tb') $number *= 1024*1024*1024*1024;
+        }
+        $number = round($number);
+        return (int)$number;
     }
 
     public static function getLatestIds($category,$days,$minsize){

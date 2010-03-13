@@ -8,7 +8,7 @@ $query = isset($_GET['q'])?(string)$_GET['q']:'';
 $category = isset($_GET['cat'])?(string)$_GET['cat']:'';
 $days = isset($_GET['d'])?(int)$_GET['d']:0;
 $days = max($days,0);
-$minsize = isset($_GET['minsize'])?(string)$_GET['minsize']:'0';
+$minsize = isset($_GET['minsize'])?(string)$_GET['minsize']:'0.1 GB';
 if(!Searcher::correctHumanSize($minsize)){
     $minsize = '0';
 }
