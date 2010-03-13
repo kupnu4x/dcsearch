@@ -55,7 +55,7 @@ class Searcher {
     public static function getFiles($ids){
         $DB = self::getDB();
         $files_by_id = $DB->select("select
-                files.id as ARRAY_KEY
+                files.id AS ARRAY_KEY,
                 files.size,
                 files.tth,
                 files.name,
