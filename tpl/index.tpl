@@ -164,7 +164,7 @@
                     {{end}}
                 </select>
 
-                by latest <input type="text" name="d" value="{{days}}" maxlength="2" size="2" />
+                by latest <input type="text" name="d" value="{{days}}" maxlength="2" size="2" /> days
                 <small>(0 - no time limit)</small><br/>
 
                 <input type="checkbox" name="nodirs" {{if nodirs}}checked{{end}} />
