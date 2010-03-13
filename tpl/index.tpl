@@ -13,7 +13,7 @@
         border:0;
     }
     #top{
-        background-color: #000;
+        background-color: #4a4a4a;
         height:50px;
         padding-top:5px;
     }

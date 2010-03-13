@@ -7,14 +7,17 @@ cp sphinx.conf.unix /usr/local/etc/sphinx.conf
 mysql-5.1
 mysql -u root -p dcsearch < db.sql
 
+memcached
+
 php-5.2.xx --with-bz2
+php-memcached
 php-blitz (http://sourceforge.net/projects/blitz-templates/)
 
 any web server (apache/nginx)
 ==========
 Installing
 ==========
-cp config.inc.unix ../inc/config.inc
+cp config.inc.dist ../inc/config.inc
 cp htaccess.dist ../.htaccess
 chmod a+x ../scripts/*
 

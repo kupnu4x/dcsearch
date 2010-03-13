@@ -12,7 +12,7 @@ source dc_files
 	sql_query_pre   = SET NAMES utf8
 	sql_query_pre   = delete from files where deleted=1
 	sql_query_pre 	= REPLACE INTO sphinx SELECT 1, ifnull(MAX(id),0) FROM files
-	sql_query 		= select id, name, extension from files where id>=$start and id<=$end and id<=(SELECT last_id FROM sphinx WHERE id=1) and deleted=0
+	sql_query 		= select id, name, extension, unix_timestamp(starttime) as starttime from files where id>=$start and id<=$end and id<=(SELECT last_id FROM sphinx WHERE id=1) and deleted=0
 	sql_query_range = select 1,last_id from sphinx where id=1
 	sql_range_step  = 100000
 	sql_attr_str2ordinal = extension
@@ -21,7 +21,7 @@ source dc_files
 source dc_files_delta : dc_files
 {
 	sql_query_pre   = SET NAMES utf8
-	sql_query 		= select id, name, tth, extension from files where id>(SELECT last_id FROM sphinx WHERE id=1) and deleted=0
+	sql_query 		= select id, name, extension, unix_timestamp(starttime) as starttime from files where id>(SELECT last_id FROM sphinx WHERE id=1) and deleted=0
 	sql_query_range = 
 	sql_range_step  = 0
 	sql_query_killlist = select id from files where deleted=1
