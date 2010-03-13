@@ -79,7 +79,9 @@
         line-height:18px;
     }
     .result .tthlink{
-        color:#000;
+        border-bottom:1px dotted #000000;
+        color:#000000;
+        text-decoration:none;
     }
     .result img.type{
         float:left;
