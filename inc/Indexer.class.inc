@@ -242,7 +242,7 @@ class Indexer {
                     mysql_real_escape_string($file['tth'])."','".
                     mysql_real_escape_string($file['name'])."','".
                     mysql_real_escape_string($file['fullpath'])."','".
-                    mysql_real_escape_string($file['extension'])."','";
+                    mysql_real_escape_string($file['extension'])."','".
                     mysql_real_escape_string(crc32($file['extension']))."')";
             $i++;
         }
