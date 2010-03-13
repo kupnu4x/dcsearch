@@ -112,7 +112,7 @@
         float:right;
         font-family: Arial;
         font-size: 10px;
-        margin:10px 10px 0 0;
+        margin:10px 10px 10px 0;
         text-align:right;
     }
     #copyright img{
@@ -192,7 +192,7 @@
             by last
             <input type="text" name="d" value="{{days}}" size="2" maxlength="2" /> days
             with min size
-            <input type="text" name="minsize" value="{{minsize}}" />
+            <input type="text" name="minsize" value="{{minsize}}" size="7" />
         {{end}}
         <input type="submit" value="Go" />
         </form>
