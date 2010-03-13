@@ -129,13 +129,13 @@ if($query || $extsearch){
         $tpl_values['pagination_viewlast'] = $pagination;
         if($page>1){
             if($page==2){
-                $tpl_values['prevlink'] = '?cat='.urlencode($category).'&d='.$days;
+                $tpl_values['prevlink'] = '?cat='.urlencode($category).'&d='.$days.'&minsize='.urlencode($minsize);
             }else{
-                $tpl_values['prevlink'] = '?p='.($page-1).'&cat='.urlencode($category).'&d='.$days;
+                $tpl_values['prevlink'] = '?p='.($page-1).'&cat='.urlencode($category).'&d='.$days.'&minsize='.urlencode($minsize);
             }
         }
         if($page<$total_pages){
-            $tpl_values['nextlink'] = '?p='.($page+1).'&cat='.urlencode($category).'&d='.$days;
+            $tpl_values['nextlink'] = '?p='.($page+1).'&cat='.urlencode($category).'&d='.$days.'&minsize='.urlencode($minsize);
         }
     }
     if(!count($results))$tpl_values['nofound'] = true;
