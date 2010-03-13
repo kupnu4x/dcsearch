@@ -628,6 +628,9 @@ class DC_P2P extends DC {
         //now we just send peer empty list and don't send any file
         if(in_array('ADCGet', $this->opponentSupports)){
             $Command = $this->waitForCommand('ADCGET');
+            if(!$Command || !$Command->params || !is_array($Command->params) || count($Command->params)<2){
+                return;
+            }
             if($Command->params[1]=='MyList.DcLst'){
                 $this->sendCommand('ADCSND file MyList.DcLst 0 0');
             }else{
