@@ -308,7 +308,9 @@ abstract class DC {
                 throw new ForceMoveException();
                 return false;
             case 'Error':
-                throw new ErrorReceivedException();
+                if(get_class($this)=='DC_P2S'){ //error from server
+                    throw new ErrorReceivedException();
+                }
                 return false;            
             default:
                 if(strpos($Command->command,'BitTorrent')!==false){
