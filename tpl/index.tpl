@@ -17,15 +17,21 @@
         height:50px;
         padding-top:5px;
     }
+    #top a{
+        color:#fff;
+        font-family:Arial;
+        font-size:10px;
+    }
     #logo{
         font-family: Arial;
         font-size: 38px;
         color:#fff;
         margin:25px 0 0 25px;
     }
-    #logo a{
+    #top #logo a{
         text-decoration: none;
         color:#fff;
+        font-size: 38px;
     }
     #top form{
         display: inline;
@@ -154,7 +160,7 @@
                 <input type="checkbox" name="nodirs" {{if nodirs}}checked{{end}} />
                        Do not search dirs
             </form>
-            <a href="?extsearch=1">normal search</a>
+            <a href="?">normal search</a>
             {{end}}
         {{end}}
     </div>
