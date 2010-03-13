@@ -241,7 +241,7 @@
             {{end}}
 
             {{begin pagination_viewlast}}
-                {{unless selected}}<a href="?{{unless $_first}}p={{$_num}}&{{end}}cat={{category}}&d={{days}}">{{$_num}}</a>{{end}}
+                {{unless selected}}<a href="?{{unless $_first}}p={{$_num}}&{{end}}cat={{category}}&d={{days}}&minsize={{minsize}}">{{$_num}}</a>{{end}}
                 {{if selected}}<b>{{$_num}}</b>{{end}}
                 {{unless $_last}}, {{end}}
             {{end}}
