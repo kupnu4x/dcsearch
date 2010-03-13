@@ -123,7 +123,7 @@ if($query || $extsearch){
     list($results, $total_results, $time) = Searcher::getLatest($category,$days,$minsize,$page,RPP);
     $total_pages = ceil( ($total_results)/RPP );
     if($total_pages>1){
-        $pagination = array_fill(1, $total_pages, array('selected'=>false,'category'=>urlencode($category),'days'=>urlencode($days)));
+        $pagination = array_fill(1, $total_pages, array('selected'=>false,'category'=>urlencode($category),'days'=>urlencode($days),'minsize'=>urlencode($minsize)));
         $pagination[$page]['selected'] = true;
         $tpl_values['pagination'] = true;
         $tpl_values['pagination_viewlast'] = $pagination;
