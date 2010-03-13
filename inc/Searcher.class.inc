@@ -171,11 +171,11 @@ class Searcher {
     }
 
     public static function correctHumanSize($size){
-        return preg_match('/^\s*(\d+)([\.\,]\d*)?\s*(k|kb|m|mb|g|gb|t|tb)?\s*$/', $size);
+        return preg_match('/^\s*(\d+)([\.\,]\d*)?\s*(k|kb|m|mb|g|gb|t|tb)?\s*$/i', $size);
     }
 
     public static function getSizeFromHuman($size){
-        preg_match('/^\s*(\d+)([\.\,]\d*)?\s*(k|kb|m|mb|g|gb|t|tb)?\s*$/', $size, $matches);
+        preg_match('/^\s*(\d+)([\.\,]\d*)?\s*(k|kb|m|mb|g|gb|t|tb)?\s*$/i', $size, $matches);
         var_dump($matches);
         return '0';
     }
