@@ -39,7 +39,7 @@
         position:relative;
         top:-5px;
     }
-    #top form .extended{
+    #top form.extended{
         display: inline-block;
         vertical-align: top;
         background-color: #e0e0e0;
@@ -148,7 +148,7 @@
             {{end}}
             
             {{if extsearch}}
-            <form method="get">
+            <form method="get" class="extended">
                 <input type="hidden" name="extsearch" value="1" />
                 <input type="text" name="q" id="q" value="{{query}}" />
                 <input type="submit" value="search" /><br>
