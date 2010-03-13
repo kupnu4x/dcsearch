@@ -148,7 +148,7 @@
                 <input type="text" name="q" id="q" value="{{query}}" />
                 <input type="submit" value="search" />
             </form>
-            <a href="?extsearch=1">extended search</a>
+            <span style="position:relative;top:-5px;"><a href="?extsearch=1">extended search</a></span>
             {{end}}
             
             {{if extsearch}}
@@ -170,7 +170,7 @@
                 <input type="checkbox" name="nodirs" {{if nodirs}}checked{{end}} />
                        Do not search dirs
             </form>
-            <a href="?">normal search</a>
+            <span style="position:relative;top:-5px;"><a href="?">normal search</a></span>
             {{end}}
         {{end}}
     </div>

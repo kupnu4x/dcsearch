@@ -157,6 +157,14 @@ class Searcher {
         return $array;
     }
 
+    public static function getExtsCrc32($category){
+        $array = self::getExts($category);
+        for ($i=0;$i<count($array);$i++){
+            $array[$i] = crc32($array[$i]);
+        }
+        return $array;
+    }
+
     public static function getLatestIds($category,$days){
         $ids = MC::get('latest_'.$category.'_'.$days);
         if(!$ids){

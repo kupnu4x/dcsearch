@@ -65,7 +65,7 @@ if($query || $extsearch){
             $searcher->SetFilterRange("starttime", 0, time()-$days*24*60*60, true); //exclude too old results
         }
         if($category){
-            $searcher->SetFilter("extension", Searcher::getExts($category));
+            $searcher->SetFilter("extension_crc32", Searcher::getExtsCrc32($category));
         }
         //FILES
         $prev_instanses_count += $total_dirs;
