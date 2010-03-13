@@ -16,6 +16,7 @@ source dc_files
 	sql_query_range = select 1,last_id from sphinx where id=1
 	sql_range_step  = 100000
 	sql_attr_str2ordinal = extension
+        sql_attr_timestamp = starttime
 }
 
 source dc_files_delta : dc_files
@@ -27,7 +28,7 @@ source dc_files_delta : dc_files
 	sql_query_killlist = select id from files where deleted=1
 	#sql_query_post  = delete from files where deleted=1
 	sql_attr_str2ordinal = extension
-	
+        sql_attr_timestamp = starttime
 }
 
 index dc_files
