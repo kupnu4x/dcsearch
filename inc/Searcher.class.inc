@@ -166,10 +166,12 @@ class Searcher {
     }
 
     public static function getLatestIds($category,$days){
-        $ids = MC::get('latest_'.$category.'_'.$days);
+        $DB = self::getDB();
+        $maxid = $DB->selectCell('select max(id) from files');
+        $ids = MC::get('latest_'.$category.'_'.$days.'_'.$maxid);
         if(!$ids){
             $exts = self::getExts($category);
-            $DB = self::getDB();
+            
             $id = $DB->selectCell('select min(id) from files where starttime >= NOW() - interval ?n day',$days);
             $ids = $DB->selectCol('select id 
                 from files f
@@ -180,7 +182,7 @@ class Searcher {
                 order by id desc
                 limit 0,1000',
                 $id,$exts,$id);
-            MC::set('latest_'.$category.'_'.$days, $ids, 24*60*60);
+            MC::set('latest_'.$category.'_'.$days.'_'.$maxid, $ids);
         }
         return $ids;
     }
