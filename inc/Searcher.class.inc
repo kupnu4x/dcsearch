@@ -54,7 +54,8 @@ class Searcher {
 
     public static function getFiles($ids){
         $DB = self::getDB();
-        $files = $DB->select("select
+        $files_by_id = $DB->select("select
+                files.id as ARRAY_KEY
                 files.size,
                 files.tth,
                 files.name,
@@ -69,6 +70,10 @@ class Searcher {
                 files.id in (?a) and
                 files.user_id=users.id",
                 $ids);
+        $files = array();
+        foreach ($ids as $id){ //correct the order as source
+            $files[] = $files_by_id[$id];
+        }
         foreach($files as &$file) {
             $file['type'] = self::getType($file['extension']);
             $file['magnet'] = self::getMagnet($file);
