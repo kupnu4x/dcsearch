@@ -109,7 +109,7 @@ if($query || $extsearch){
 }elseif($category && $days){
     $days = max($days,1);
 
-    $tpl_values['hide_search_form'] = true;
+    //$tpl_values['hide_search_form'] = true;
     $tpl_values['category'] = htmlspecialchars($category);
     $tpl_values['days'] = htmlspecialchars($days);
     $categories = Searcher::getCategories($category);
