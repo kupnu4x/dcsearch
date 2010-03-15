@@ -211,13 +211,13 @@ class Searcher {
         if(!$ids){
             $exts = self::getExts($category);
             
-            $id = $DB->selectCell('select min(id) from files where starttime >= NOW() - interval ?n day',$days);
+            $id = $DB->selectCell('select min(id) from files where starttime >= NOW() - interval ?d day',$days);
             $ids = $DB->selectCol('select id 
                 from files f
                 where
                     id>=? and
                     extension in (?a) and
-                    size>=?n and
+                    size>=?d and
                     not exists (select 1 from files temptable where id<? and temptable.tth=f.tth)
                 order by id desc
                 limit 0,1000',
