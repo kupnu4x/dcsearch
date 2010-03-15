@@ -61,7 +61,7 @@ source dc_tths
 	sql_query_pre   = SET NAMES utf8
 	sql_query_pre   = delete from files where deleted=1
 	sql_query_pre 	= REPLACE INTO sphinx SELECT 3, ifnull(MAX(id),0) FROM files
-	sql_query 		= select id, tth from files where id>=$start and id<=$end and id<=(SELECT last_id FROM sphinx WHERE id=1) and deleted=0
+	sql_query	= select id, tth from files where id>=$start and id<=$end and id<=(SELECT last_id FROM sphinx WHERE id=1) and deleted=0
 	sql_query_range = select 1,last_id from sphinx where id=1
 	sql_range_step  = 100000
 }
@@ -69,11 +69,11 @@ source dc_tths
 source dc_tths_delta : dc_tths
 {
 	sql_query_pre   = SET NAMES utf8
-	sql_query 		= select id, tth from files where id>(SELECT last_id FROM sphinx WHERE id=3) and deleted=0
+	sql_query	= select id, tth from files where id>(SELECT last_id FROM sphinx WHERE id=3) and deleted=0
 	sql_query_range = 
 	sql_range_step  = 0
 	sql_query_killlist = select id from files where deleted=1
-	sql_query_post  = delete from files where deleted=1
+	#sql_query_post  = delete from files where deleted=1
 }
 
 index dc_tths
@@ -104,7 +104,7 @@ source dc_dirs
 	sql_query_pre   = SET NAMES utf8
 	sql_query_pre   = delete from dirs where deleted=1
 	sql_query_pre 	= REPLACE INTO sphinx SELECT 2, ifnull(MAX(id),0) FROM dirs
-	sql_query 		= select id, name from dirs where id>=$start and id<=$end and id<=(SELECT last_id FROM sphinx WHERE id=2) and deleted=0
+	sql_query 	= select id, name from dirs where id>=$start and id<=$end and id<=(SELECT last_id FROM sphinx WHERE id=2) and deleted=0
 	sql_query_range = select 1,last_id from sphinx where id=2
 	sql_range_step  = 100000
 }
@@ -112,11 +112,11 @@ source dc_dirs
 source dc_dirs_delta : dc_dirs
 {
 	sql_query_pre   = SET NAMES utf8
-	sql_query 		= select id, name from dirs where id>(SELECT last_id FROM sphinx WHERE id=2) and deleted=0
+	sql_query 	= select id, name from dirs where id>(SELECT last_id FROM sphinx WHERE id=2) and deleted=0
 	sql_query_range = 
 	sql_range_step  = 0
 	sql_query_killlist = select id from dirs where deleted=1
-	sql_query_post  = delete from dirs where deleted=1	
+	#sql_query_post  = delete from dirs where deleted=1
 }
 
 index dc_dirs
