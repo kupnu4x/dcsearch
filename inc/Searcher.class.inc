@@ -102,6 +102,9 @@ class Searcher {
         foreach ($ids as $id){ //correct the order as source
             $dirs[] = $dirs_by_id[$id];
         }
+        foreach($dirs as &$dir) {
+            $dir['lasttime'] = date('Y-m-d H:i:s', $dir['lasttime']);
+        }
         return $dirs;
     }
 
