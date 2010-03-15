@@ -27,6 +27,7 @@ if($query || $extsearch){
     $categories = Searcher::getCategories($category,true);
     $tpl_values['categories'] = $categories;
     $tpl_values['days'] = $days;
+    $tpl_values['minsize'] = $minsize;
 
     if($query){
         $searcher = new SphinxClient();
@@ -53,6 +54,9 @@ if($query || $extsearch){
 
         if(!$nodirs){
             //DIRS
+            if($days){
+                $searcher->SetFilterRange("starttime", 0, time()-$days*24*60*60, true); //exclude too old results
+            }
             $prev_instanses_count += $total_tths;
             $start = max(0,$min-$prev_instanses_count);
             $len = min(RPP, max(1,$max-$prev_instanses_count) );
@@ -65,11 +69,16 @@ if($query || $extsearch){
             }
         }
 
+        $searcher->ResetFilters();
         if($days){
             $searcher->SetFilterRange("starttime", 0, time()-$days*24*60*60, true); //exclude too old results
         }
         if($category){
             $searcher->SetFilter("extension_crc32", Searcher::getExtsCrc32($category));
+        }
+        $minsize_calc = Searcher::getSizeFromHuman($minsize);
+        if($minsize_calc){
+            $searcher->SetFilter("size", 0, $minsize_calc, true); //exclude too little results
         }
         //FILES
         $prev_instanses_count += $total_dirs;
@@ -85,19 +94,42 @@ if($query || $extsearch){
 
         $total_pages = min(ceil(1000/RPP),ceil( ($total_tths+$total_dirs+$total_files)/RPP ));
         if($total_pages>1){
-            $pagination = array_fill(1, $total_pages, array('selected'=>false,'query'=>urlencode($query)));
+            if(!$extsearch){
+                $pagination = array_fill(1, $total_pages, array('selected'=>false,'query'=>urlencode($query)));
+            }else{
+                $pagination = array_fill(1, $total_pages, array(
+                    'selected'=>false,
+                    'query'=>urlencode($query),
+                    'cat'=>urlencode($category),
+                    'd'=>urldecode($days),
+                    'minsize'=>urlencode($minsize)
+                ));
+            }
             $pagination[$page]['selected'] = true;
             $tpl_values['pagination'] = true;
             $tpl_values['pagination_search'] = $pagination;
-            if($page>1){
-                if($page==2){
-                    $tpl_values['prevlink'] = '?q='.urlencode($query);
-                }else{
-                    $tpl_values['prevlink'] = '?p='.($page-1).'&q='.urlencode($query);
+            if(!$extsearch){
+                if($page>1){
+                    if($page==2){
+                        $tpl_values['prevlink'] = '?q='.urlencode($query);
+                    }else{
+                        $tpl_values['prevlink'] = '?p='.($page-1).'&q='.urlencode($query);
+                    }
                 }
-            }
-            if($page<$total_pages){
-                $tpl_values['nextlink'] = '?p='.($page+1).'&q='.urlencode($query);
+                if($page<$total_pages){
+                    $tpl_values['nextlink'] = '?p='.($page+1).'&q='.urlencode($query);
+                }
+            }else{
+                if($page>1){
+                    if($page==2){
+                        $tpl_values['prevlink'] = '?q='.urlencode($query).'&cat='.urlencode($category).'&d='.$days.'&minsize='.urlencode($minsize);
+                    }else{
+                        $tpl_values['prevlink'] = '?p='.($page-1).'&q='.urlencode($query).'&cat='.urlencode($category).'&d='.$days.'&minsize='.urlencode($minsize);
+                    }
+                }
+                if($page<$total_pages){
+                    $tpl_values['nextlink'] = '?p='.($page+1).'&q='.urlencode($query).'&cat='.urlencode($category).'&d='.$days.'&minsize='.urlencode($minsize);
+                }
             }
         }
 

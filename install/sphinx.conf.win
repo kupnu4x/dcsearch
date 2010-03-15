@@ -12,9 +12,10 @@ source dc_files
 	sql_query_pre   = SET NAMES utf8
 	sql_query_pre   = delete from files where deleted=1
 	sql_query_pre 	= REPLACE INTO sphinx SELECT 1, ifnull(MAX(id),0) FROM files
-	sql_query       = select id, name, extension_crc32, unix_timestamp(starttime) as starttime from files where id>=$start and id<=$end and id<=(SELECT last_id FROM sphinx WHERE id=1) and deleted=0
+	sql_query       = select id, name, size, extension_crc32, unix_timestamp(starttime) as starttime from files where id>=$start and id<=$end and id<=(SELECT last_id FROM sphinx WHERE id=1) and deleted=0
 	sql_query_range = select 1,last_id from sphinx where id=1
 	sql_range_step  = 100000
+        sql_attr_bigint = size
 	sql_attr_bigint = extension_crc32
         sql_attr_timestamp = starttime
 }
@@ -22,11 +23,12 @@ source dc_files
 source dc_files_delta : dc_files
 {
 	sql_query_pre   = SET NAMES utf8
-	sql_query 	= select id, name, extension_crc32, unix_timestamp(starttime) as starttime from files where id>(SELECT last_id FROM sphinx WHERE id=1) and deleted=0
+	sql_query 	= select id, name, size, extension_crc32, unix_timestamp(starttime) as starttime from files where id>(SELECT last_id FROM sphinx WHERE id=1) and deleted=0
 	sql_query_range = 
 	sql_range_step  = 0
 	sql_query_killlist = select id from files where deleted=1
 	#sql_query_post  = delete from files where deleted=1
+        sql_attr_bigint = size
 	sql_attr_bigint = extension_crc32
 	sql_attr_timestamp = starttime
 }
@@ -104,7 +106,7 @@ source dc_dirs
 	sql_query_pre   = SET NAMES utf8
 	sql_query_pre   = delete from dirs where deleted=1
 	sql_query_pre 	= REPLACE INTO sphinx SELECT 2, ifnull(MAX(id),0) FROM dirs
-	sql_query 	= select id, name from dirs where id>=$start and id<=$end and id<=(SELECT last_id FROM sphinx WHERE id=2) and deleted=0
+	sql_query 	= select id, name, unix_timestamp(starttime) as starttime from dirs where id>=$start and id<=$end and id<=(SELECT last_id FROM sphinx WHERE id=2) and deleted=0
 	sql_query_range = select 1,last_id from sphinx where id=2
 	sql_range_step  = 100000
 }
@@ -112,7 +114,7 @@ source dc_dirs
 source dc_dirs_delta : dc_dirs
 {
 	sql_query_pre   = SET NAMES utf8
-	sql_query 	= select id, name from dirs where id>(SELECT last_id FROM sphinx WHERE id=2) and deleted=0
+	sql_query 	= select id, name, unix_timestamp(starttime) as starttime from dirs where id>(SELECT last_id FROM sphinx WHERE id=2) and deleted=0
 	sql_query_range = 
 	sql_range_step  = 0
 	sql_query_killlist = select id from dirs where deleted=1
