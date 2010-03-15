@@ -85,16 +85,24 @@ class Searcher {
 
     public static function getDirs($ids){
         $DB = self::getDB();
-        return $DB->select("select
+        $dirs_by_id = $DB->select("select
+                dirs.id AS ARRAY_KEY,
                 dirs.fullpath,
                 dirs.name,
+                dirs.starttime,
                 users.nick,
+                users.lastseedtime as lasttime,
                 '1' as rowtype_dir
             from dirs,users
             where
                 dirs.id in (?a) and
                 dirs.user_id=users.id",
                 $ids);
+        $dirs = array();
+        foreach ($ids as $id){ //correct the order as source
+            $dirs[] = $dirs_by_id[$id];
+        }
+        return $dirs;
     }
 
     public static function HumanSize($size){

@@ -219,7 +219,8 @@
             {{end}}
             {{if rowtype_dir}}
                 <img src="img/folder.png" class="type" alt="dir" /> //{{nick}}/{{fullpath}}/<b>{{name}}</b>/<br/>
-                <small><i>directory</i></small>
+                <small><i>directory</i></small><br/>
+                <small style="color:#999">In index since {{starttime}}, Last seed {{lasttime}}</small>
             {{end}}
             {{if rowtype_file}}
                 <img src="img/{{type}}.png" class="type" alt="file" /> //{{nick}}/{{fullpath}}/<b>{{name}}.{{extension}}</b><br/>
