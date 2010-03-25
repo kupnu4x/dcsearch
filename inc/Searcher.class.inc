@@ -212,16 +212,18 @@ class Searcher {
             $exts = self::getExts($category);
             
             $id = $DB->selectCell('select min(id) from files where starttime >= NOW() - interval ?d day',$days);
-            $ids = $DB->selectCol('select id 
+            $ids = $DB->selectCol('select min(id) as ARRAY_KEY, count(id)
                 from files f
                 where
                     id>=? and
                     extension in (?a) and
                     size>=?d and
                     not exists (select 1 from files temptable where id<? and temptable.tth=f.tth)
+                group by tth
                 order by id desc
                 limit 0,1000',
                 $id,$exts,$minsize,$id);
+            var_dump($ids);
             MC::set('latest_'.$category.'_'.$days.'_'.$minsize.'_'.$maxid, $ids);
         }
         return $ids;
