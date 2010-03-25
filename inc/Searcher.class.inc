@@ -46,7 +46,7 @@ class Searcher {
         foreach($files as &$file) {
             $file['type'] = self::getType($file['extension']);
             $file['magnet'] = self::getMagnet($file);
-            $file['lasttime'] = date('Y-m-dd H:i:s', $file['lasttime']);
+            $file['lasttime'] = date('Y-m-d H:i:s', $file['lasttime']);
             $file['size'] = self::HumanSize($file['size']);
         }
         return $files;

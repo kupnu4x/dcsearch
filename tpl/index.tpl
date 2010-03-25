@@ -173,7 +173,7 @@
                 <small>(0 - no time limit)</small><br/>
 
                 with minimal size <input type="text" name="minsize" value="{{minsize}}" size="7" />
-                <small>example: 0.1 GB</small><br/>
+                <small>(example: 0.1 GB)</small><br/>
 
                 <input type="checkbox" name="nodirs" {{if nodirs}}checked{{end}} />
                        Do not search dirs
