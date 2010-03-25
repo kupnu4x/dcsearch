@@ -56,6 +56,7 @@ class Searcher {
         $DB = self::getDB();
         $files_by_id = $DB->select("select
                 files.id AS ARRAY_KEY,
+                files.id,
                 files.size,
                 files.tth,
                 files.name,
@@ -223,7 +224,6 @@ class Searcher {
                 order by id desc
                 limit 0,1000',
                 $id,$exts,$minsize,$id);
-            var_dump($ids);
             MC::set('latest_'.$category.'_'.$days.'_'.$minsize.'_'.$maxid, $ids);
         }
         return $ids;
@@ -231,12 +231,20 @@ class Searcher {
 
     public static function getLatest($category,$days,$minsize,$page,$RPP){
         $st = microtime(true);
-        $ids = self::getLatestIds($category, $days, $minsize);
+        $latest_results = self::getLatestIds($category, $days, $minsize);
+        
+        $ids = array_keys($latest_results);
+        
         $total_results = count($ids);
         $ids = array_splice($ids, ($page-1)*$RPP, $RPP);
         $results = self::getFiles($ids);
+        foreach ($results as &$result){
+            $result['more_count'] = $latest_results[$result['id']];
+        }
+
         $et = microtime(true);
         $time = round($et-$st,3);
+        var_dump($results);
         return array($results, $total_results, $time);
     }
 
