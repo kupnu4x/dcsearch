@@ -1,3 +1,3 @@
 <pre><?
-echo exec("svn up");
+echo exec("/usr/local/bin/svn update /usr/local/www/apache22/data/dcsearch/");
 ?></pre>
