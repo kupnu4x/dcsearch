@@ -239,12 +239,11 @@ class Searcher {
         $ids = array_splice($ids, ($page-1)*$RPP, $RPP);
         $results = self::getFiles($ids);
         foreach ($results as &$result){
-            $result['more_count'] = $latest_results[$result['id']];
+            $result['more_count'] = $latest_results[$result['id']]-1;
         }
 
         $et = microtime(true);
         $time = round($et-$st,3);
-        var_dump($results);
         return array($results, $total_results, $time);
     }
 

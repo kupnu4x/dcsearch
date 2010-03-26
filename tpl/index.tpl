@@ -226,7 +226,11 @@
                 <small style="color:#999">In index since {{starttime}}, Last seed {{lasttime}}</small>
             {{end}}
             {{if rowtype_file}}
-                <img src="img/{{type}}.png" class="type" alt="file" /> //{{nick}}/{{fullpath}}/<b>{{name}}.{{extension}}</b><br/>
+                <img src="img/{{type}}.png" class="type" alt="file" /> //{{nick}}/{{fullpath}}/<b>{{name}}.{{extension}}</b>
+                {{if more_count}}
+                <a href="?q={{tth}}">and more {{more_count}} sources</a>
+                {{end}}
+                <br/>
                 <small>Size: {{size}}, TTH: <a href="?q={{tth}}" class="tthlink">{{tth}}</a> <a href="{{magnet}}"><img src="img/magnet.png" class="magnet" alt="magnet link" /></a> </small><br/>
                 <small style="color:#999">In index since {{starttime}}, Last seed {{lasttime}}</small>
             {{end}}
