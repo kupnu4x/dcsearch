@@ -78,6 +78,9 @@
         padding : 0 0 0 42px;
         line-height:18px;
     }
+    .result .andmore{
+        color:#666666;
+    }
     .result .tthlink{
         border-bottom:1px dotted #000000;
         color:#000000;
@@ -228,7 +231,7 @@
             {{if rowtype_file}}
                 <img src="img/{{type}}.png" class="type" alt="file" /> //{{nick}}/{{fullpath}}/<b>{{name}}.{{extension}}</b>
                 {{if more_count}}
-                <a href="?q={{tth}}">and more {{more_count}} sources</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;<a href="?q={{tth}}" class="andmore">and more {{more_count}} sources</a>
                 {{end}}
                 <br/>
                 <small>Size: {{size}}, TTH: <a href="?q={{tth}}" class="tthlink">{{tth}}</a> <a href="{{magnet}}"><img src="img/magnet.png" class="magnet" alt="magnet link" /></a> </small><br/>
