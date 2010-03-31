@@ -138,10 +138,14 @@ if($query || $extsearch){
         $tpl_values['time'] = $tths_result['time']+$dirs_result['time']+$files_result['time'];
         $tpl_values['powered_sphinx'] = true;
     }
+    if($extsearch){
+        $tpl_values['extended_form'] = true;
+    }else{
+        $tpl_values['normal_form'] = true;
+    }
 }elseif($category && $days){
     $days = max($days,1);
 
-    //$tpl_values['hide_search_form'] = true;
     $tpl_values['category'] = htmlspecialchars($category);
     $tpl_values['days'] = htmlspecialchars($days);
     $categories = Searcher::getCategories($category);
@@ -174,7 +178,9 @@ if($query || $extsearch){
     $tpl_values['results'] = $results;
     $tpl_values['time'] = $time;
     $tpl_values['powered_mysql'] = true;
+    $tpl_values['latest_form'] = true;
 }else{
+    $tpl_values['normal_form'] = true;
     $tpl_values['viewlast_categories'] = Searcher::getCategories();
 }
 $T->set($tpl_values);

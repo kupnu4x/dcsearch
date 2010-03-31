@@ -159,16 +159,14 @@
 <body>
     <div id="top">
         <span id="logo"><a href="?">DCSearch</a></span>
-        {{unless hide_search_form}}
-            {{unless extsearch}}
+            {{if normal_form}}
             <form method="get">
                 <input type="text" name="q" id="q" value="{{query}}" />
                 <input type="submit" value="search" />
             </form>
-            <span style="position:relative;top:-5px;"><a href="?q={{query}}&extsearch=1">extended search</a></span>
             {{end}}
             
-            {{if extsearch}}
+            {{if extended_form}}
             <form method="get" class="extended">
                 <input type="hidden" name="extsearch" value="1" />
                 <input type="text" name="q" id="q" value="{{query}}" />
@@ -190,32 +188,35 @@
                 <input type="checkbox" name="nodirs" {{if nodirs}}checked{{end}} />
                        Do not search dirs
             </form>
+            {{end}}
+
+            {{if latest_form}}
+            <form method="get" class="extended">
+                {{begin filter_last}}
+                    Show only
+                    <select name="cat">
+                        {{begin categories}}
+                        <option value="{{key}}" {{if selected}}selected {{end}}>{{value}}</option>
+                        {{end}}
+                    </select>
+                    by last
+                    <input type="text" name="d" value="{{days}}" size="2" maxlength="2" /> days
+                    with min size
+                    <input type="text" name="minsize" value="{{minsize}}" size="7" />
+                {{end}}
+                <input type="submit" value="Go" />
+            </form>
+            {{end}}
+
+            
             <span style="position:relative;top:-5px;">
                 &nbsp;
-                <a href="?q={{query}}">normal search</a>
+                {{unless normal_form}}<a href="?q={{query}}">normal search</a>{{end}}
+                {{unless extended_form}}<a href="?q={{query}}&extsearch=1">extended search</a>{{end}}
+                {{unless latest_form}}<a href="?cat=video&d=1">view latest</a>{{end}}                
             </span>
-            {{end}}
-        {{end}}
     </div>
-    {{if filter_last}}
-    <div id="filter">
-        <form method="get">
-        {{begin filter_last}}
-            Show only
-            <select name="cat">
-                {{begin categories}}
-                <option value="{{key}}" {{if selected}}selected {{end}}>{{value}}</option>
-                {{end}}
-            </select>
-            by last
-            <input type="text" name="d" value="{{days}}" size="2" maxlength="2" /> days
-            with min size
-            <input type="text" name="minsize" value="{{minsize}}" size="7" />
-        {{end}}
-        <input type="submit" value="Go" />
-        </form>
-    </div>
-    {{end}}
+
     <div id="results">
         {{if viewlast_categories}}
             View latest:<br/>
