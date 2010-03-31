@@ -126,6 +126,15 @@
         margin:-10px;
     }
 </style>
+
+<!--[if IE lte 7]>
+<style type="text/css">
+#top form.extended{
+    display:inline;
+}
+</style>
+<![endif]-->
+
 {{if pagination}}
     {{if prevlink}}<link rel="prev" href="{{prevlink}}" id="prevlink" />{{end}}
     {{if nextlink}}<link rel="next" href="{{nextlink}}" id="nextlink" />{{end}}
