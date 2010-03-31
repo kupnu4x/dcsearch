@@ -208,9 +208,7 @@
             </form>
             {{end}}
 
-            
             <span style="position:relative;top:-5px;">
-                
                 {{unless normal_form}}&nbsp;<a href="?q={{query}}">normal search</a>{{end}}
                 {{unless extended_form}}&nbsp;<a href="?q={{query}}&extsearch=1">extended search</a>{{end}}
                 {{unless latest_form}}&nbsp;<a href="?cat=video&d=1">view latest</a>{{end}}
