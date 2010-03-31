@@ -127,7 +127,7 @@
     }
 </style>
 
-<!--[if IE lte 7]>
+<!--[if lte IE 7]>
 <style type="text/css">
 #top form.extended{
     display:inline;
@@ -190,7 +190,10 @@
                 <input type="checkbox" name="nodirs" {{if nodirs}}checked{{end}} />
                        Do not search dirs
             </form>
-            <span style="position:relative;top:-5px;"><a href="?q={{query}}">normal search</a></span>
+            <span style="position:relative;top:-5px;">
+                &nbsp;
+                <a href="?q={{query}}">normal search</a>
+            </span>
             {{end}}
         {{end}}
     </div>
