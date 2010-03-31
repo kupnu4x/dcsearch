@@ -210,10 +210,10 @@
 
             
             <span style="position:relative;top:-5px;">
-                &nbsp;
-                {{unless normal_form}}<a href="?q={{query}}">normal search</a>{{end}}
-                {{unless extended_form}}<a href="?q={{query}}&extsearch=1">extended search</a>{{end}}
-                {{unless latest_form}}<a href="?cat=video&d=1">view latest</a>{{end}}                
+                
+                {{unless normal_form}}&nbsp;<a href="?q={{query}}">normal search</a>{{end}}
+                {{unless extended_form}}&nbsp;<a href="?q={{query}}&extsearch=1">extended search</a>{{end}}
+                {{unless latest_form}}&nbsp;<a href="?cat=video&d=1">view latest</a>{{end}}
             </span>
     </div>
 
@@ -221,7 +221,7 @@
         {{if viewlast_categories}}
             View latest:<br/>
             {{begin viewlast_categories}}
-                <a href="?cat={{key}}&d=7">{{value}}</a><br/>
+                <a href="?cat={{key}}&d=1">{{value}}</a><br/>
             {{end}}
         {{end}}
 
