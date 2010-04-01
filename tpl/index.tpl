@@ -128,7 +128,11 @@
 </style>
 
 <!--[if lte IE 7]>
+<script type="text/javascript" src="static/js/fixpng.js"></script>
 <style type="text/css">
+img{
+    filter:expression(fixPNG(this));
+}
 #top form.extended{
     display:inline;
 }
