@@ -128,7 +128,7 @@
 </style>
 
 <!--[if lte IE 7]>
-<script type="text/javascript" src="static/js/fixpng.js"></script>
+<script type="text/javascript" src="js/fixpng.js"></script>
 <style type="text/css">
 img{
     filter:expression(fixPNG(this));
