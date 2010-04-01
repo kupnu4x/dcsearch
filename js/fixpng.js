@@ -4,7 +4,7 @@ function fixPNG(element){
         if(element.tagName=='IMG' || element.tagName=='INPUT'){
             if(/\.png$/.test(element.src)){
                 src = element.src;
-                element.src = "static/images/blank.gif";
+                element.src = "img/blank.gif";
             }
         }else{
             src = element.currentStyle.backgroundImage.match(/url\("(.+\.png)"\)/i)
